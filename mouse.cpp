@@ -1,18 +1,13 @@
 #include <algorithm>
-#include "Mouse.h"
+#include "mouse.h"
+#include "util.h"
 #include "API.h"
 
 bool Mouse::search_with_DFS(){
 
     auto search_cell = m_current_cell; 
-    //log(std::to_string(search_cell.x) + ", " +  std::to_string(search_cell.y)); 
-    if(m_belief_map.cell_visited(search_cell)){
-        //log("start visit"); 
-    }else{
-        //log("start not visit"); 
-
-    }
-
+    //log(search_cell); 
+    
     while(true){
         if(not m_belief_map.cell_visited(search_cell)){
             m_path.push_back(search_cell); 
@@ -29,7 +24,7 @@ bool Mouse::search_with_DFS(){
             }
         }
 
-        Node_Pos next_search_cell; 
+        NodePosition next_search_cell; 
         if(m_belief_map.cell_north_valid(search_cell)){
             next_search_cell= {search_cell.x, search_cell.y+1}; 
 
@@ -50,8 +45,8 @@ bool Mouse::search_with_DFS(){
             }
 
             next_search_cell = m_path.back(); 
-            API::setColor(next_search_cell.x, next_search_cell.y, 'y'); 
-            log("back step"+std::to_string(next_search_cell.x) + ", " +  std::to_string(next_search_cell.y)); 
+            API::setColor(next_search_cell.x, next_search_cell.y, 'Y'); 
+            log(next_search_cell, "backtrack: "); 
         }
 
         search_cell = next_search_cell; 
@@ -60,14 +55,13 @@ bool Mouse::search_with_DFS(){
 
 }
 bool Mouse::follow_path(){
-    //log(std::to_string(m_path.size())); 
     for(auto &cell: m_path){
         // m_real_map.set_cell_visited(m_current_cell); 
         bool move_success = move_to_cell(cell); 
         if(not move_success){
             //log("hit wall"); 
-            //log(std::to_string(m_current_cell.x) + ", " +  std::to_string(m_current_cell.y)); 
-            //log("next cell" + std::to_string(cell.x) + ", " +  std::to_string(cell.y)); 
+            log(m_current_cell); 
+            //log(cell); 
             // m_real_map.clear_cell_visited(m_current_cell); 
             return false; 
         }
@@ -84,10 +78,9 @@ void Mouse::reset_search(){
     m_real_map.set_start(m_current_cell); 
     m_belief_map = m_real_map; 
     API::clearAllColor(); 
-    return; 
 }
 
-bool Mouse::move_to_cell(Node_Pos cell){
+bool Mouse::move_to_cell(NodePosition cell){
     update_walls(); 
     Direction next_direction = m_direction; 
     if(cell.y > m_current_cell.y){
@@ -124,7 +117,7 @@ bool Mouse::move_to_cell(Node_Pos cell){
 }
 
 bool Mouse::update_walls(){
-    //log(std::to_string(m_current_cell.x) + ", " +  std::to_string(m_current_cell.y)); 
+    //log(m_current_cell); 
     Direction wall_direction = m_direction;  
     if(API::wallLeft()){
         //log("wall Left"); 
@@ -163,7 +156,6 @@ void Mouse::change_direction(Direction direction){
         API::turnLeft(); 
     }
     m_direction = direction; 
-    return; 
 }
 
 

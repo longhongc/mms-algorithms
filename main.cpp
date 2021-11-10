@@ -1,5 +1,6 @@
 #include "API.h"
-#include "Mouse.h"
+#include "mouse.h"
+#include "util.h"
 
 int main(){
     Mouse mouse; 
