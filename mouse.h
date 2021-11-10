@@ -20,7 +20,8 @@ class Mouse{
 
         }
 
-        bool search_with_DFS(); 
+        bool offline_DFS_search(); 
+        bool online_DFS_search(); 
         bool follow_path(); 
         void reset_search(); 
 
@@ -39,7 +40,7 @@ class Mouse{
         Map m_real_map; 
  
 
-        std::vector<NodePosition> m_path; 
+        std::vector<NodePosition> m_goal_path; 
         std::vector<NodePosition> m_visited; 
 }; 
 #endif

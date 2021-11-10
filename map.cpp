@@ -63,7 +63,7 @@ void Map::set_default(){
         m_map[j][0].west_wall = true;  
     }
     // start node wall
-    m_map[0][0].east_wall = true; 
+    //m_map[0][0].east_wall = true; 
 }
 
 void Map::set_cell_visited(NodePosition cell){
@@ -119,6 +119,14 @@ void Map::set_cell_wall(NodePosition cell, Direction direction){
     }
 
 }
+
+void Map::set_cell_parent(NodePosition cell, NodePosition parent){
+    m_map[cell.y][cell.x].parent = m_map[parent.y][parent.x].pos; 
+}
+NodePosition Map::get_cell_parent(NodePosition cell){
+    return m_map[cell.y][cell.x].parent; 
+}
+
 
 void Map::set_start(NodePosition start){
     m_start = start; 

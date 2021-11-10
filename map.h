@@ -6,10 +6,18 @@
 struct NodePosition{
     int x = 0; 
     int y = 0; 
+    bool operator==(const NodePosition &rhs) const{
+        return this->x == rhs.x && this->y == rhs.y; 
+    }
+    bool operator!=(const NodePosition &rhs) const{
+        return this->x != rhs.x || this->y != rhs.y; 
+    }
+
 }; 
 
 struct Node{
     NodePosition pos; 
+    NodePosition parent; 
     bool north_wall = false; 
     bool east_wall = false; 
     bool south_wall = false; 
@@ -32,7 +40,11 @@ class Map{
         void set_cell_visited(NodePosition cell); 
         void clear_cell_visited(NodePosition cell); 
         void clear_all_visited(); 
+
         void set_cell_wall(NodePosition cell, Direction direction); 
+        void set_cell_parent(NodePosition cell, NodePosition parent); 
+        NodePosition get_cell_parent(NodePosition cell); 
+
         void set_start(NodePosition start); 
 
         bool cell_north_valid(NodePosition cell); 
