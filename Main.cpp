@@ -3,10 +3,18 @@
 
 int main(){
     Mouse mouse; 
-    bool success = mouse.search_with_DFS();
-    if(success){
-        mouse.follow_path();
+    bool arrived_goal = false; 
+    while(not arrived_goal){
+        mouse.reset_search(); 
+        bool find_path = mouse.search_with_DFS();
+        if(find_path){
+            arrived_goal = mouse.follow_path();
+        }else{
+            log("find_path failed"); 
+            break; 
+        }
     }
+
     // while(not mouse.at_goal){
     //     auto m_path = mouse.search_with_DFS(); 
     //     bool finish = mouse.follow_path(m_path);

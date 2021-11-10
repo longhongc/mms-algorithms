@@ -1,8 +1,41 @@
 #include <iostream>
 #include "Util.h"
+#include "API.h"
 
 void log(const std::string& text){
     std::cerr << text << std::endl; 
+}
+
+Direction direction_left(Direction current){
+    switch(current){
+        case Direction::North: 
+            return Direction::West; 
+
+        case Direction::East: 
+            return Direction::North; 
+
+        case Direction::South: 
+            return Direction::East; 
+
+        case Direction::West: 
+            return Direction::South; 
+    }
+} 
+
+Direction direction_right(Direction current){ 
+    switch(current){
+        case Direction::North: 
+            return Direction::East; 
+
+        case Direction::East: 
+            return Direction::South; 
+
+        case Direction::South: 
+            return Direction::West; 
+
+        case Direction::West: 
+            return Direction::North; 
+    }
 }
 
 void Map::set_default_map(){
@@ -44,21 +77,60 @@ void Map::set_cell_visited(Node_Pos cell){
     return; 
 }
 
+void Map::clear_cell_visited(Node_Pos cell){
+    m_map[cell.y][cell.x].visited = false; 
+    return; 
+}
+
+void Map::clear_all_visited(){
+    for(int i=0; i<m_maze_width; i++){
+        for(int j=0; j<m_maze_height; j++){
+            m_map[j][i].visited = false; 
+        }
+    }
+}
+
 void Map::set_cell_wall(Node_Pos cell, Direction direction){
     switch(direction){
         case Direction::North:
             m_map[cell.y][cell.x].north_wall = true; 
+            if(cell.y != m_maze_height-1){
+                m_map[cell.y+1][cell.x].south_wall = true; 
+            }
+            API::setWall(cell.x, cell.y, 'n'); 
+            //log("wall north"); 
+            break; 
         case Direction::East:
             m_map[cell.y][cell.x].east_wall = true; 
+            if(cell.x != m_maze_width-1){
+                m_map[cell.y][cell.x+1].west_wall = true; 
+            }
+            API::setWall(cell.x, cell.y, 'e'); 
+            //log("wall east"); 
+            break; 
         case Direction::South:
             m_map[cell.y][cell.x].south_wall = true; 
+            if(cell.y != 0){
+                m_map[cell.y-1][cell.x].north_wall = true; 
+            }
+            API::setWall(cell.x, cell.y, 's'); 
+            //log("wall south"); 
+            break; 
         case Direction::West:
             m_map[cell.y][cell.x].west_wall = true; 
-
-        default:
-            log("set wall error"); 
+            if(cell.x != 0){
+                m_map[cell.y][cell.x-1].east_wall = true; 
+            }
+            API::setWall(cell.x, cell.y, 'w'); 
+            //log("wall west"); 
+            break; 
     }
 
+}
+
+void Map::set_start(Node_Pos start){
+    m_start = start; 
+    return; 
 }
 
 bool Map::cell_north_valid(Node_Pos cell){

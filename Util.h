@@ -20,15 +20,21 @@ struct Node{
 
 enum class Direction{North, East, South, West}; 
 
+Direction direction_left(Direction current); 
+Direction direction_right(Direction current); 
+
 class Map{
     public:
         Map(Node_Pos start={0, 0}, Node_Pos goal={8, 8})
-                          :m_start{start}, m_goal{goal}{
+            :m_start{start}, m_goal{goal}{
         }
 
         void set_default_map(); 
         void set_cell_visited(Node_Pos cell); 
+        void clear_cell_visited(Node_Pos cell); 
+        void clear_all_visited(); 
         void set_cell_wall(Node_Pos cell, Direction direction); 
+        void set_start(Node_Pos start); 
 
         bool cell_north_valid(Node_Pos cell); 
         bool cell_east_valid(Node_Pos cell); 
