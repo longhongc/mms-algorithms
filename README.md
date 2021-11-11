@@ -1,5 +1,5 @@
 # mms-algorithms
-Implement path finding algorithm using Micromouse simulator  
+Implement path finding algorithms using Micromouse simulator  
 [Micromouse simulator](https://github.com/mackorone/mms)
 
 ### Algorithms:  
@@ -21,4 +21,8 @@ Fill the executable file name in run command
 
 ## Algorithms
 ### Online DFS
-### Ofline DFS
+The mouse pushes child nodes of current node to a node stack, and pops the top of it to explore. After it finds out that this is a dead end, it will find its next searching node by poping the stack until there is an avialiable node to explore. The mouse will follow its trail and backtrack to the avaliable next searching node.
+
+The red line is where backtracking happens.
+
+### Offline DFS
