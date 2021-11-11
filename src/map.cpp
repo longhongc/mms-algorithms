@@ -49,23 +49,26 @@ void Map::set_default(){
     // North wall
     for(int i=0; i<m_maze_width; i++){
         m_map[m_maze_height-1][i].north_wall = true; 
+        API::setWall(i, m_maze_height-1, 'n'); 
     }
     // East wall
     for(int j=0; j<m_maze_height; j++){
         m_map[j][m_maze_width-1].east_wall = true;  
+        API::setWall(m_maze_width-1, j, 'e'); 
     }
     // South wall
     for(int i=0; i<m_maze_width; i++){
         m_map[0][i].south_wall = true; 
+        API::setWall(i, 0, 's'); 
     }
     // West wall
     for(int j=0; j<m_maze_height; j++){
         m_map[j][0].west_wall = true;  
+        API::setWall(0, j, 'w'); 
     }
-    // start node wall
-    //m_map[0][0].east_wall = true; 
-    
-    API::setColor(m_goal.x, m_goal.y, 'o'); 
+
+    API::setText(m_goal.x, m_goal.y, "goal"); 
+    API::setColor(m_goal.x, m_goal.y, 'y'); 
 }
 
 void Map::set_cell_visited(NodePosition cell){
@@ -125,6 +128,7 @@ void Map::set_cell_wall(NodePosition cell, Direction direction){
 void Map::set_cell_parent(NodePosition cell, NodePosition parent){
     m_map[cell.y][cell.x].parent = m_map[parent.y][parent.x].pos; 
 }
+
 NodePosition Map::get_cell_parent(NodePosition cell){
     return m_map[cell.y][cell.x].parent; 
 }
@@ -141,6 +145,7 @@ bool Map::cell_north_valid(NodePosition cell){
 
     return not (m_map[cell.y][cell.x].north_wall || m_map[cell.y+1][cell.x].visited); 
 }
+
 bool Map::cell_east_valid(NodePosition cell){ 
     if(cell.x == m_maze_width-1){
         return false; 
@@ -148,6 +153,7 @@ bool Map::cell_east_valid(NodePosition cell){
 
     return not (m_map[cell.y][cell.x].east_wall || m_map[cell.y][cell.x+1].visited); 
 }
+
 bool Map::cell_south_valid(NodePosition cell){ 
     if(cell.y == 0){
         return false; 
@@ -155,6 +161,7 @@ bool Map::cell_south_valid(NodePosition cell){
 
     return not (m_map[cell.y][cell.x].south_wall || m_map[cell.y-1][cell.x].visited); 
 }
+
 bool Map::cell_west_valid(NodePosition cell){ 
     if(cell.x == 0){
         return false; 
@@ -162,7 +169,6 @@ bool Map::cell_west_valid(NodePosition cell){
 
     return not (m_map[cell.y][cell.x].west_wall || m_map[cell.y][cell.x-1].visited); 
 }
-
 
 bool Map::cell_visited(NodePosition cell){
     return m_map[cell.y][cell.x].visited; 
