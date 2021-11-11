@@ -11,18 +11,10 @@ int main(){
         if(find_path){
             arrived_goal = mouse.follow_path();
         }else{
-            log("find_path failed"); 
+            log("maze no solution!!!"); 
             break; 
         }
     }
 
-    // while(not mouse.at_goal){
-    //     auto m_path = mouse.search_with_DFS(); 
-    //     bool finish = mouse.follow_path(m_path);
-    //     if(not finish){
-    //         mouse.reset_search(); 
-    //     }
-    // }
-    //
     return 0; 
 }

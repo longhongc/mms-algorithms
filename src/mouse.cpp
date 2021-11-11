@@ -11,15 +11,10 @@ bool Mouse::offline_DFS_search(){
     while(true){
         if(not m_belief_map.cell_visited(search_cell)){
             m_goal_path.push_back(search_cell); 
-            m_visited.push_back(search_cell); 
             m_belief_map.set_cell_visited(search_cell); 
             API::setColor(search_cell.x, search_cell.y, 'a'); 
 
             if(search_cell.x == m_goal_cell.x && search_cell.y == m_goal_cell.y){
-                //log(std::to_string(m_goal_path.size())); 
-                //log("success"); 
-                // m_belief_map.clear_all_visited(); 
-                //API::clearAllColor(); 
                 return true; 
             }
         }
@@ -60,9 +55,10 @@ bool Mouse::online_DFS_search(){
     while(true){
         if(m_current_cell == m_goal_cell){
             log("success"); 
+            reach_goal = true; 
+            API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
             return true; 
         }
-        //m_visited.push(current_node.pos); 
         m_real_map.set_cell_visited(m_current_cell); 
         m_goal_path.push_back(m_current_cell); 
         API::setColor(m_current_cell.x, m_current_cell.y, 'a'); 
@@ -102,7 +98,6 @@ bool Mouse::online_DFS_search(){
         node_stack.pop_back(); 
 
         if(node_stack.empty()){
-            log("find path failed"); 
             return false; 
         }
 
@@ -124,26 +119,23 @@ bool Mouse::online_DFS_search(){
 }
 bool Mouse::follow_path(){
     for(auto &cell: m_goal_path){
-        // m_real_map.set_cell_visited(m_current_cell); 
         update_walls(); 
         bool move_success = move_to_cell(cell); 
         if(not move_success){
             //log("hit wall"); 
             log(m_current_cell); 
-            //log(cell); 
-            // m_real_map.clear_cell_visited(m_current_cell); 
             return false; 
         }
         m_current_cell = cell; 
         //API::setColor(m_current_cell.x, m_current_cell.y, 'a'); 
     }
-    //log("Arrive goal"); 
+    reach_goal = true; 
+    API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
     return true; 
 }
 void Mouse::reset_search(){
 
     m_goal_path.clear(); 
-    m_visited.clear(); 
     m_real_map.set_start(m_current_cell); 
     m_belief_map = m_real_map; 
     API::clearAllColor(); 
@@ -175,8 +167,7 @@ bool Mouse::move_to_cell(NodePosition cell){
 
     change_direction(next_direction); 
 
-    bool update_success = update_walls(); 
-    if (not update_success){
+    if(API::wallFront()){
         return false; 
     }
 

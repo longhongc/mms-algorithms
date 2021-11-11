@@ -44,7 +44,7 @@ void Map::set_default(){
     //     --------
     //     |      |
     //     |      |
-    //     | |    |
+    //     |      |
     //     --------
     // North wall
     for(int i=0; i<m_maze_width; i++){
@@ -64,6 +64,8 @@ void Map::set_default(){
     }
     // start node wall
     //m_map[0][0].east_wall = true; 
+    
+    API::setColor(m_goal.x, m_goal.y, 'o'); 
 }
 
 void Map::set_cell_visited(NodePosition cell){

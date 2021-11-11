@@ -8,7 +8,7 @@
 class Mouse{
     public: 
         Mouse()
-            :find_goal{false},
+            :reach_goal{false},
              m_current_cell{0, 0},
              m_goal_cell{8, 8},
              m_direction{Direction::North},
@@ -25,7 +25,7 @@ class Mouse{
         bool follow_path(); 
         void reset_search(); 
 
-        bool find_goal; 
+        bool reach_goal; 
 
     private: 
         bool move_to_cell(NodePosition cell); 
@@ -41,6 +41,5 @@ class Mouse{
  
 
         std::vector<NodePosition> m_goal_path; 
-        std::vector<NodePosition> m_visited; 
 }; 
 #endif
