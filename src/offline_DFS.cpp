@@ -11,10 +11,11 @@ int main(){
         if(find_path){
             arrived_goal = mouse.follow_path();
         }else{
-            log("maze no solution!!!"); 
+            log("Maze no solution!!!"); 
             break; 
         }
     }
+    log("Success"); 
 
     return 0; 
 }

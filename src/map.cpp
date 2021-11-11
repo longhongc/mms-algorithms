@@ -167,4 +167,16 @@ bool Map::cell_west_valid(NodePosition cell){
 bool Map::cell_visited(NodePosition cell){
     return m_map[cell.y][cell.x].visited; 
 }
+
+bool Map::cell_dead(NodePosition cell){
+    if(cell_north_valid(cell) ||
+       cell_east_valid(cell) ||
+       cell_south_valid(cell) ||
+       cell_west_valid(cell)){
+
+        return false; 
+    }
+            
+    return true; 
+}
  

@@ -6,7 +6,7 @@ int main(){
     Mouse mouse; 
     bool find_path = mouse.online_DFS_search();
     if(not find_path){
-        log("maze no solution!!!"); 
+        log("Maze no solution!!!"); 
     }
       
     return 0; 

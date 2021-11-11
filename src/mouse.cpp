@@ -6,7 +6,6 @@
 bool Mouse::offline_DFS_search(){
 
     auto search_cell = m_current_cell; 
-    //log(search_cell); 
     
     while(true){
         if(not m_belief_map.cell_visited(search_cell)){
@@ -54,7 +53,6 @@ bool Mouse::online_DFS_search(){
 
     while(true){
         if(m_current_cell == m_goal_cell){
-            log("success"); 
             reach_goal = true; 
             API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
             return true; 
@@ -94,16 +92,20 @@ bool Mouse::online_DFS_search(){
 
         }
 
-        NodePosition next_search_cell = node_stack.back(); 
-        node_stack.pop_back(); 
-
-        if(node_stack.empty()){
-            return false; 
+        NodePosition next_search_cell; 
+        do{
+            next_search_cell = node_stack.back(); 
+            node_stack.pop_back(); 
+            if(node_stack.empty()){
+                return false; 
+            }
         }
+        while(m_real_map.cell_dead(next_search_cell)); 
 
         if(child_num == 0){
             NodePosition intersection_cell = m_real_map.get_cell_parent(next_search_cell); 
             while(m_current_cell != intersection_cell){
+                log(m_current_cell); 
                 NodePosition parent_cell = m_real_map.get_cell_parent(m_current_cell); 
                 move_to_cell(parent_cell); 
                 m_goal_path.pop_back(); 

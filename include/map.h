@@ -53,6 +53,8 @@ class Map{
         bool cell_west_valid(NodePosition cell); 
         bool cell_visited(NodePosition cell); 
 
+        bool cell_dead(NodePosition cell); 
+
     private:
         static const int m_maze_width = 16; 
         static const int m_maze_height = 16; 
