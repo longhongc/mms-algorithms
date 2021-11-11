@@ -96,22 +96,22 @@ bool Mouse::online_DFS_search(){
         do{
             next_search_cell = node_stack.back(); 
             node_stack.pop_back(); 
+
             if(node_stack.empty()){
                 return false; 
             }
+            API::setColor(next_search_cell.x, next_search_cell.y, 'o'); 
         }
         while(m_real_map.cell_dead(next_search_cell)); 
 
-        if(child_num == 0){
-            NodePosition intersection_cell = m_real_map.get_cell_parent(next_search_cell); 
-            while(m_current_cell != intersection_cell){
-                log(m_current_cell); 
-                NodePosition parent_cell = m_real_map.get_cell_parent(m_current_cell); 
-                move_to_cell(parent_cell); 
-                m_goal_path.pop_back(); 
-                API::setColor(m_current_cell.x, m_current_cell.y, 'k'); 
-                m_current_cell = parent_cell; 
-            }
+        NodePosition intersection_cell = m_real_map.get_cell_parent(next_search_cell); 
+        while(m_current_cell != intersection_cell){
+            log(m_current_cell); 
+            NodePosition parent_cell = m_real_map.get_cell_parent(m_current_cell); 
+            move_to_cell(parent_cell); 
+            m_goal_path.pop_back(); 
+            API::setColor(m_current_cell.x, m_current_cell.y, 'k'); 
+            m_current_cell = parent_cell; 
         }
 
         move_to_cell(next_search_cell); 
@@ -119,6 +119,7 @@ bool Mouse::online_DFS_search(){
     }
     
 }
+
 bool Mouse::follow_path(){
     for(auto &cell: m_goal_path){
         update_walls(); 
@@ -135,6 +136,7 @@ bool Mouse::follow_path(){
     API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
     return true; 
 }
+
 void Mouse::reset_search(){
 
     m_goal_path.clear(); 
