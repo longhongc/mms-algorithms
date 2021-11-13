@@ -1,3 +1,11 @@
+/**
+ * @file offline_DFS.cpp
+ * @Brief mouse using offline_DFS to solve a maze 
+ * @author Chang-Hong Chen(longhongc@gmail.com), Prateek Verma(verma@termpmail.umd.edu)
+ * @version 2.1.0
+ * @date 2021-11-13
+ */
+
 #include "API.h"
 #include "mouse.h"
 #include "util.h"
