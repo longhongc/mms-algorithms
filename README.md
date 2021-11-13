@@ -4,9 +4,9 @@ Implement path finding algorithms using Micromouse simulator
 
 ### Algorithms:  
 - [**Online DFS**](#online-dfs)      
-![online_DFS](./videos/online_DFS.gif)
+![online_DFS](https://github.com/longhongc/mms-algorithms/blob/master/videos/online_DFS.gif)
 - [**Offline DFS**](#offline-dfs)    
-![offline_DFS](./videos/offline_DFS.gif)
+![offline_DFS](https://github.com/longhongc/mms-algorithms/blob/master/videos/offline_DFS.gif)
 
 ## Build 
 ```
@@ -24,7 +24,7 @@ Fill the executable file name in run command
 The mouse pushes child nodes of current node to a node stack, and pops the top of it to explore. After it finds out that this is a dead end, it will find its next searching node by poping the stack until there is an avialiable node to explore. The mouse will follow its trail and backtrack to the avaliable next searching node.
 
 The red line is where backtracking happens.  
-![online_DFS_graph](./videos/online_DFS_graph.png)  
+![online_DFS_graph](https://github.com/longhongc/mms-algorithms/blob/master/videos/online_DFS_graph.png)  
 
 In the implementation, I added some feature that the mouse will recognize some cells are actually an dead end, and it will ditch those cells when poping from the node stack. The dark red color labels the cells that the mouse thinks are unavailable.
 

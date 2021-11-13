@@ -2,17 +2,7 @@
 #include "util.h"
 #include "API.h"
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Calculating the left direction of a Direction
- *        Implement this because the mouse in simulator can only detect relative walls of its direction, ie: left, right, front
- *        Map relative direction (left, right) to absolute direction (North, East, South, West)
- *
- * @Param current: the input direction
- *
- * @Returns the left direction  
- */
-/* --------------------------------------------------------------------------*/
+
 Direction direction_left(Direction current){
     switch(current){
         case Direction::North: 
@@ -29,17 +19,6 @@ Direction direction_left(Direction current){
     }
 } 
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Calculating the right direction of a Direction
- *        Implement this because the mouse in simulator can only detect relative walls of its direction, ie: left, right, front
- *        Map relative direction (left, right) to absolute direction (North, East, South, West)
- *
- * @Param current: the input direction
- *
- * @Returns the right direction 
- */
-/* --------------------------------------------------------------------------*/
 Direction direction_right(Direction current){ 
     switch(current){
         case Direction::North: 
@@ -56,11 +35,6 @@ Direction direction_right(Direction current){
     }
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Set up a default map with walls surrounding it 
- */
-/* --------------------------------------------------------------------------*/
 void Map::set_default(){
     for(int i=0; i<m_maze_width; i++){
         for(int j=0; j<m_maze_height; j++){
@@ -98,33 +72,14 @@ void Map::set_default(){
     API::setColor(m_goal.x, m_goal.y, 'y'); 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Set a cell in the map as visited
- *
- * @Param cell: a node position (x, y) on the map
- */
-/* --------------------------------------------------------------------------*/
 void Map::set_cell_visited(NodePosition cell){
     m_map[cell.y][cell.x].visited = true; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Mark a cell unvisited
- *
- * @Param cell: a node position (x, y) on the map
- */
-/* --------------------------------------------------------------------------*/
 void Map::clear_cell_visited(NodePosition cell){
     m_map[cell.y][cell.x].visited = false; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Mark all the cells unvisited
- */
-/* --------------------------------------------------------------------------*/
 void Map::clear_all_visited(){
     for(int i=0; i<m_maze_width; i++){
         for(int j=0; j<m_maze_height; j++){
@@ -133,15 +88,6 @@ void Map::clear_all_visited(){
     }
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Mark the detected wall around the cell
- *        Also mark the wall of the adjacent cell
- *
- * @Param cell: a node position (x, y) on the map
- * @Param direction: the detected wall absolute direction (North, East, South, West)
- */
-/* --------------------------------------------------------------------------*/
 void Map::set_cell_wall(NodePosition cell, Direction direction){
     switch(direction){
         case Direction::North:
@@ -184,52 +130,18 @@ void Map::set_cell_wall(NodePosition cell, Direction direction){
 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Set the previous cell on the path as its parent cell 
- *
- * @Param cell: the current node position (x, y)
- * @Param parent: the previous node position on the path, ie: (x-1, y)
- */
-/* --------------------------------------------------------------------------*/
 void Map::set_cell_parent(NodePosition cell, NodePosition parent){
     m_map[cell.y][cell.x].parent = m_map[parent.y][parent.x].pos; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Get the node position of the previous cell on the path
- *
- * @Param cell: the current node position (x, y)
- *
- * @Returns parent cell node position   
- */
-/* --------------------------------------------------------------------------*/
 NodePosition Map::get_cell_parent(NodePosition cell){
     return m_map[cell.y][cell.x].parent; 
 }
 
-
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Set the node position of the starting cell  
- *
- * @Param start: a node position (x, y) on the map
- */
-/* --------------------------------------------------------------------------*/
 void Map::set_start(NodePosition start){
     m_start = start; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Check if the availability of the adjacent cell in abosolute direction
- *               
- * @Param cell: the current node position (x, y)
- *
- * @Returns true if no walls in the abosoute direction or the adjacent cell is not visited 
- */
-/* --------------------------------------------------------------------------*/
 bool Map::cell_north_valid(NodePosition cell){
     // no north cell for the celing row
     if(cell.y == m_maze_height-1){
@@ -263,28 +175,10 @@ bool Map::cell_west_valid(NodePosition cell){
     return not (m_map[cell.y][cell.x].west_wall || m_map[cell.y][cell.x-1].visited); 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Check if a cell has been visited
- *
- * @Param cell: a node position (x, y) on the map
- *
- * @Returns true if a cell is marked as visited  
- */
-/* --------------------------------------------------------------------------*/
 bool Map::cell_visited(NodePosition cell){
     return m_map[cell.y][cell.x].visited; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Check if a cell is a dead end   
- *
- * @Param cell: a node position (x, y) on the map
- *
- * @Returns false if one of the direction is valid   
- */
-/* --------------------------------------------------------------------------*/
 bool Map::cell_dead(NodePosition cell){
     if(cell_north_valid(cell) ||
        cell_east_valid(cell) ||

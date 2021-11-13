@@ -2,16 +2,6 @@
 #include "util.h"
 #include "API.h"
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief The DFS algorithm that explore the node tree and move at the same time using real-time data from the real map  
- *        Color notation: gray is the DFS path, cell after backtracking will become dark gray 
- *                        orange is the next target cell on the stack
- *                        dark red is for the dead cell
- *
- * @Returns true if a path to goal has been found  
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::online_DFS_search(){
     std::vector<NodePosition> node_stack;    
     node_stack.push_back(m_current_cell); 
@@ -103,14 +93,6 @@ bool Mouse::online_DFS_search(){
     
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief The DFS serach algorithm that construct search path with the default/updated belief map of the mouse
- *        Move the mouse with the constructed path util it encounters a new wall not on the belief map or finds the goal
- *
- * @Returns   
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::offline_DFS_search(){
     while(not reach_goal){
         reset_search(); 
@@ -124,14 +106,6 @@ bool Mouse::offline_DFS_search(){
     return true; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Reset states for a new run of offline DFS 
- *        Reset all the previous path
- *        Set current cell as new start cell
- *        Update the belief map with the real wall data on the real map
- */
-/* --------------------------------------------------------------------------*/
 void Mouse::reset_search(){
 
     m_goal_path.clear(); 
@@ -143,14 +117,6 @@ void Mouse::reset_search(){
     API::setText(m_goal_cell.x, m_goal_cell.y, "goal"); 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief The DFS serach algorithm that search with the default/updated belief map of the mouse
- *        Color notation: gray is the DFS path, cell after backtracking will become dark gray 
- *
- * @Returns true if a path to goal has been found  
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::search_belief_map(){
 
     auto search_cell = m_current_cell; 
@@ -202,13 +168,6 @@ bool Mouse::search_belief_map(){
     }
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief the mouse will move along a give path m_goal_path generated from the offline DFS
- *
- * @Returns true if the mouse arrive the goal cell, false if the mouse hits a wall not in its belief map  
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::follow_path(){
     for(auto &cell: m_goal_path){
         update_walls(); 
@@ -226,15 +185,6 @@ bool Mouse::follow_path(){
 }
 
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Move the mouse to next cell on the path
- *
- * @Param cell: a node position (x, y) on the map
- *
- * @Returns true if the move success, false if there is a wall in front of it    
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::move_to_cell(NodePosition cell){
     // find the direction of the next cell relative to current cell
     Direction next_direction = m_direction; 
@@ -273,13 +223,6 @@ bool Mouse::move_to_cell(NodePosition cell){
     return true; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief Mark the walls of a cell on the real map through relative wall detection from the mouse 
- *
- * @Returns false if a wall is in front of the mouse   
- */
-/* --------------------------------------------------------------------------*/
 bool Mouse::update_walls(){
     //log(m_current_cell); 
     Direction wall_direction = m_direction;  
@@ -305,13 +248,6 @@ bool Mouse::update_walls(){
     return true; 
 }
 
-/* --------------------------------------------------------------------------*/
-/**
- * @Brief  Change the direction of the mouse
- *
- * @Param direction: target direction
- */
-/* --------------------------------------------------------------------------*/
 void Mouse::change_direction(Direction direction){
     if(direction == direction_left(m_direction)){
         //log("turn left"); 

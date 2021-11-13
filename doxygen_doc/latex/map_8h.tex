@@ -1,0 +1,88 @@
+\hypertarget{map_8h}{}\doxysection{include/map.h File Reference}
+\label{map_8h}\index{include/map.h@{include/map.h}}
+{\ttfamily \#include $<$array$>$}\newline
+Include dependency graph for map.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{map_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{map_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_node_position}{Node\+Position}}
+\item 
+struct \mbox{\hyperlink{struct_node}{Node}}
+\item 
+class \mbox{\hyperlink{class_map}{Map}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} \{ {\bfseries North}
+, {\bfseries East}
+, {\bfseries South}
+, {\bfseries West}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} \mbox{\hyperlink{map_8h_a81174ba8f13d5caedbb17e29469c2dc6}{direction\+\_\+left}} (\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} current)
+\item 
+\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} \mbox{\hyperlink{map_8h_a56fb19ca4599e5fef3b3d45c37ef209d}{direction\+\_\+right}} (\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} current)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+@\+Brief All the information relating to the maze \begin{DoxyAuthor}{Author}
+Chang-\/\+Hong Chen(\href{mailto:longhongc@gmail.com}{\texttt{ longhongc@gmail.\+com}}), Prateek Verma(\href{mailto:verma@termpmail.umd.edu}{\texttt{ verma@termpmail.\+umd.\+edu}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2021-\/11-\/13 
+\end{DoxyDate}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}\label{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}} 
+\index{map.h@{map.h}!Direction@{Direction}}
+\index{Direction@{Direction}!map.h@{map.h}}
+\doxysubsubsection{\texorpdfstring{Direction}{Direction}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+@\+Brief Define the absolute direction Up -\/\texorpdfstring{$>$}{>} North Right -\/\texorpdfstring{$>$}{>} East Down -\/\texorpdfstring{$>$}{>} South Left -\/\texorpdfstring{$>$}{>} West 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{map_8h_a81174ba8f13d5caedbb17e29469c2dc6}\label{map_8h_a81174ba8f13d5caedbb17e29469c2dc6}} 
+\index{map.h@{map.h}!direction\_left@{direction\_left}}
+\index{direction\_left@{direction\_left}!map.h@{map.h}}
+\doxysubsubsection{\texorpdfstring{direction\_left()}{direction\_left()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} direction\+\_\+left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}}}]{current }\end{DoxyParamCaption})}
+
+@\+Brief Calculating the left direction of a Direction Implement this because the mouse in simulator can only detect relative walls of its direction, ie\+: left, right, front \mbox{\hyperlink{class_map}{Map}} relative direction (left, right) to absolute direction (North, East, South, West)
+
+@\+Param current\+: the input direction
+
+@\+Returns the left direction ~\newline
+ \mbox{\Hypertarget{map_8h_a56fb19ca4599e5fef3b3d45c37ef209d}\label{map_8h_a56fb19ca4599e5fef3b3d45c37ef209d}} 
+\index{map.h@{map.h}!direction\_right@{direction\_right}}
+\index{direction\_right@{direction\_right}!map.h@{map.h}}
+\doxysubsubsection{\texorpdfstring{direction\_right()}{direction\_right()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}} direction\+\_\+right (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{map_8h_a224b9163917ac32fc95a60d8c1eec3aa}{Direction}}}]{current }\end{DoxyParamCaption})}
+
+@\+Brief Calculating the right direction of a Direction Implement this because the mouse in simulator can only detect relative walls of its direction, ie\+: left, right, front \mbox{\hyperlink{class_map}{Map}} relative direction (left, right) to absolute direction (North, East, South, West)
+
+@\+Param current\+: the input direction
+
+@\+Returns the right direction 

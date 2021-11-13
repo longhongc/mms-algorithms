@@ -16,7 +16,7 @@ int main(){
     if(not find_path){
         log("Maze no solution!!!"); 
     }else{
-        log("Sucess"); 
+        log("Success"); 
     }
       
     return 0; 

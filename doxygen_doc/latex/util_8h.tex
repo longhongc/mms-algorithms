@@ -1,0 +1,58 @@
+\hypertarget{util_8h}{}\doxysection{include/util.h File Reference}
+\label{util_8h}\index{include/util.h@{include/util.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}map.\+h\char`\"{}}\newline
+Include dependency graph for util.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{util_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{util_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{util_8h_a2c25a04bab69bb02a25923f5aabbcb9e}{log}} (const std\+::string \&text)
+\item 
+void \mbox{\hyperlink{util_8h_a27fb8090c76b58368de8981e107b2342}{log}} (const \mbox{\hyperlink{struct_node_position}{Node\+Position}} \&cell, const std\+::string \&text=\char`\"{}\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+@\+Brief utility functions for debugging ~\newline
+ \begin{DoxyAuthor}{Author}
+Chang-\/\+Hong Chen(\href{mailto:longhongc@gmail.com}{\texttt{ longhongc@gmail.\+com}}), Prateek Verma(\href{mailto:verma@termpmail.umd.edu}{\texttt{ verma@termpmail.\+umd.\+edu}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2021-\/11-\/13 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{util_8h_a27fb8090c76b58368de8981e107b2342}\label{util_8h_a27fb8090c76b58368de8981e107b2342}} 
+\index{util.h@{util.h}!log@{log}}
+\index{log@{log}!util.h@{util.h}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void log (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_node_position}{Node\+Position}} \&}]{cell,  }\item[{const std\+::string \&}]{text = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+@\+Brief debug logger for \mbox{\hyperlink{struct_node_position}{Node\+Position}} and a label descibing the \mbox{\hyperlink{struct_node_position}{Node\+Position}}
+
+@\+Param cell @\+Param label \mbox{\Hypertarget{util_8h_a2c25a04bab69bb02a25923f5aabbcb9e}\label{util_8h_a2c25a04bab69bb02a25923f5aabbcb9e}} 
+\index{util.h@{util.h}!log@{log}}
+\index{log@{log}!util.h@{util.h}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void log (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})}
+
+@\+Brief debug logger for string output on mouse simulator
+
+@\+Param text\+: the output string 
