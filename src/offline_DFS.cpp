@@ -23,7 +23,9 @@ int main(){
             break; 
         }
     }
-    log("Success"); 
+    if(arived_goal){
+        log("Success"); 
+    }
 
     return 0; 
 }
