@@ -3,6 +3,11 @@
 
 #include <array>
 
+/* --------------------------------------------------------------------------*/
+/**
+ * @Brief The position (x, y) of a cell
+ */
+/* --------------------------------------------------------------------------*/
 struct NodePosition{
     int x = 0; 
     int y = 0; 
@@ -15,9 +20,16 @@ struct NodePosition{
 
 }; 
 
+/* --------------------------------------------------------------------------*/
+/**
+ * @Brief The complete information of a cell
+ */
+/* --------------------------------------------------------------------------*/
 struct Node{
-    NodePosition pos; 
-    NodePosition parent; 
+    NodePosition pos; // the current postion (x, y)
+    NodePosition parent; // the previous cell position on the path 
+
+    // define the wall of a cell in absolute direction
     bool north_wall = false; 
     bool east_wall = false; 
     bool south_wall = false; 
@@ -25,11 +37,25 @@ struct Node{
     bool visited = false; 
 }; 
 
+/* --------------------------------------------------------------------------*/
+/**
+ * @Brief Define the absolute direction
+ *        Up -> North 
+ *        Right -> East 
+ *        Down -> South 
+ *        Left -> West 
+ */
+/* --------------------------------------------------------------------------*/
 enum class Direction{North, East, South, West}; 
 
 Direction direction_left(Direction current); 
 Direction direction_right(Direction current); 
 
+/* --------------------------------------------------------------------------*/
+/**
+ * @Brief The complete information of a maze map
+ */
+/* --------------------------------------------------------------------------*/
 class Map{
     public:
         Map(NodePosition start={0, 0}, NodePosition goal={8, 8})
