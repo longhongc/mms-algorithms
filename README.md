@@ -21,12 +21,12 @@ Fill the edit mouse configuration in mms simulator
 ### Online DFS
 ![online_DFS](https://github.com/longhongc/mms-algorithms/blob/master/videos/online_DFS.gif)  
 <pre>
-yello: unreached goal 
-green: reached goal 
-orange: next search cell 
-gray: traveled path
-dark gray: backtracked cells
-dark red: dead cells
+Yello: unreached goal 
+Green: reached goal 
+Orange: next search cell 
+Gray: traveled path
+Dark Gray: backtracked cells
+Dark Red: dead cells
 </pre>
  
 The mouse starts from the start cell, and along the path pushes all child cells of current cell to a node stack. It pops the top of the stack and set it as the next cell to explore. After iterations of exploration when it enters a dead end, it will find its next searching cell by poping the stack again until there is an available cell to explore. The mouse will follow its trail and backtrack to the parent of the available cell and move to that available cell to continue its exploration until it finds the goal or searches all the cells if the maze is unsolvable. 
