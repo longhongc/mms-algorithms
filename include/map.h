@@ -2,7 +2,6 @@
  * @file map.h
  * @Brief All the information relating to the maze 
  * @author Chang-Hong Chen(longhongc@gmail.com), Prateek Verma(verma@termpmail.umd.edu)
- * @version 2.1.0
  * @date 2021-11-13
  */
 

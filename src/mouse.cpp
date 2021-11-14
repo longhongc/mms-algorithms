@@ -13,6 +13,7 @@ bool Mouse::online_DFS_search(){
         // goal found
         if(m_current_cell == m_goal_cell){
             reach_goal = true; 
+            // color notation green: reaching the goal 
             API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
             return true; 
         }
@@ -20,6 +21,7 @@ bool Mouse::online_DFS_search(){
         m_real_map.set_cell_visited(m_current_cell); 
         m_goal_path.push_back(m_current_cell); 
         count++; 
+        // color notation gray: cells along the path
         API::setColor(m_current_cell.x, m_current_cell.y, 'a'); 
 
         // find available adjacent cells and add all of them to stack
@@ -68,8 +70,10 @@ bool Mouse::online_DFS_search(){
             }
 
             if(not m_real_map.cell_dead(next_search_cell)){
+                // color notation orange: next search cell
                 API::setColor(next_search_cell.x, next_search_cell.y, 'o'); 
             }else{
+                // color notation dark red: dead cell
                 API::setColor(next_search_cell.x, next_search_cell.y, 'R'); 
                 log(next_search_cell, "Dead Cell: "); 
             }
@@ -83,6 +87,7 @@ bool Mouse::online_DFS_search(){
             NodePosition parent_cell = m_real_map.get_cell_parent(m_current_cell); 
             move_to_cell(parent_cell); 
             m_goal_path.pop_back(); 
+            // color notation dark gray: cells after backtracking
             API::setColor(m_current_cell.x, m_current_cell.y, 'A'); 
             m_current_cell = parent_cell; 
         }
@@ -95,9 +100,12 @@ bool Mouse::online_DFS_search(){
 
 bool Mouse::offline_DFS_search(){
     while(not reach_goal){
+        // reset and update belief map
         reset_search(); 
+        // DFS search in belief map
         bool find_path = search_belief_map();
         if(find_path){
+            // follow the path generated from the belief map
             reach_goal = follow_path();
         }else{
             return false; 
@@ -110,6 +118,7 @@ void Mouse::reset_search(){
 
     m_goal_path.clear(); 
     m_real_map.set_start(m_current_cell); 
+    // update belief map with new detected walls 
     m_belief_map = m_real_map; 
     API::clearAllColor(); 
     API::clearAllText(); 
@@ -133,6 +142,7 @@ bool Mouse::search_belief_map(){
             if(search_cell.x == m_goal_cell.x && search_cell.y == m_goal_cell.y){
                 return true; 
             }else{
+                // color notation gray: cells along the path
                 API::setColor(search_cell.x, search_cell.y, 'a'); 
             }
         }
@@ -153,6 +163,7 @@ bool Mouse::search_belief_map(){
 
         }else{
             // no adjcent cells available, do backtracking
+            // color notation dark gray: cells after backtracking
             API::setColor(search_cell.x, search_cell.y, 'A'); 
             m_goal_path.pop_back(); 
             // pop out the start cell, no solution
@@ -170,16 +181,21 @@ bool Mouse::search_belief_map(){
 
 bool Mouse::follow_path(){
     for(auto &cell: m_goal_path){
+        // detect the wall in current cell
         update_walls(); 
+        // color notation orange: next search cell
         API::setColor(cell.x, cell.y, 'o'); 
+        // move to next cell on the path
         bool move_success = move_to_cell(cell); 
         if(not move_success){
             //log("hit wall"); 
             return false; 
         }
+        // color notation black: cells after passing through
         API::setColor(cell.x, cell.y, 'k'); 
         m_current_cell = cell; 
     }
+    // color notation green: reaching the goal 
     API::setColor(m_current_cell.x, m_current_cell.y, 'g'); 
     return true; 
 }

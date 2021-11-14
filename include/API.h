@@ -1,3 +1,9 @@
+/**
+ * @file API.h
+ * @Brief C++ API provided for micromouse simulator    
+ * @author mackorone
+ * @link https://github.com/mackorone/mms-cpp
+ */
 #pragma once
 
 #include <string>
