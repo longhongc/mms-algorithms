@@ -3,8 +3,8 @@ Implement path finding algorithms using Micromouse simulator
 [Micromouse simulator](https://github.com/mackorone/mms)
 
 ### Algorithms:  
-- [**Online DFS**](#online-dfs): grow DFS tree while exploring the maze      
-- [**Offline DFS**](#offline-dfs): plan DFS path on a belief map then move along the generated path and update new observations to the belief map       
+- [**Online DFS**](#online-dfs): grow DFS tree incrementally while exploring the maze      
+- [**Offline DFS**](#offline-dfs): plan complete DFS path on a belief map then move along the generated path and update new observations to the belief map       
 
 ## Build 
 ```
